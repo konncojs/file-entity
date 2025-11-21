@@ -1,0 +1,28 @@
+{
+	"name": "@konnco/file-entity",
+	"version": "0.0.0",
+	"description": "A lightweight model for file metadata.",
+	"type": "module",
+	"main": "dist/index.cjs",
+	"module": "dist/index.mjs",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"release": "release-it"
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com",
+		"access": "public"
+	},
+	"author": "Konnco Studio <support@konnco.com> (konnco)",
+	"keywords": [],
+	"license": "ISC",
+	"packageManager": "pnpm@10.10.0",
+	"devDependencies": {
+		"release-it": "^19.0.6",
+		"tsdown": "^0.16.6",
+		"typescript": "^5.9.3"
+	}
+}
