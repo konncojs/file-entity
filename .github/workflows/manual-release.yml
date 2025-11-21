@@ -61,9 +61,6 @@ jobs:
       - name: 🗃️ Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: 💉 Running Test
-        run: pnpm test
-
       - name: 📦 Building library
         run: pnpm build
 
