@@ -62,16 +62,16 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: 💉 Running Test
-        run: pnpm nx run-many -t test --tui false --verbose
+        run: pnpm test
 
       - name: 📦 Building library
-        run: pnpm nx run-many -t build --tui false
+        run: pnpm build
 
       - name: 🚀 Run release-it with manual increment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          CMD="pnpm release-it ${{ github.event.inputs.increment }} --ci"
+          CMD="pnpm release ${{ github.event.inputs.increment }} --ci"
           if [ "${{ github.event.inputs['dry-run'] }}" = "true" ]; then
             CMD="$CMD --dry-run"
           fi
