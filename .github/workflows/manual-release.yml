@@ -1,0 +1,79 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: "Version increment type"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
+      dry-run:
+        description: 'Run release-it in dry-run mode'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  release:
+    runs-on: self-hosted
+    permissions:
+      contents: write
+      packages: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 🧑‍💻 Set Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 💼 Install pnpm globally
+        run: npm install -g pnpm
+
+      - name: ⚙️ Configure .npmrc for GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
+          echo "@konnco:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🗃️ Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 💉 Running Test
+        run: pnpm nx run-many -t test --tui false --verbose
+
+      - name: 📦 Building library
+        run: pnpm nx run-many -t build --tui false
+
+      - name: 🚀 Run release-it with manual increment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CMD="pnpm release-it ${{ github.event.inputs.increment }} --ci"
+          if [ "${{ github.event.inputs['dry-run'] }}" = "true" ]; then
+            CMD="$CMD --dry-run"
+          fi
+          echo "Running command: $CMD"
+          $CMD
