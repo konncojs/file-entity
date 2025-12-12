@@ -17,13 +17,13 @@ on:
           - premajor
           - prerelease
       dry-run:
-        description: 'Run release-it in dry-run mode'
+        description: "Run release-it in dry-run mode"
         required: false
-        default: 'false'
+        default: "false"
         type: choice
         options:
-          - 'true'
-          - 'false'
+          - "true"
+          - "false"
 
 jobs:
   release:
@@ -31,8 +31,6 @@ jobs:
     permissions:
       contents: write
       packages: write
-      issues: write
-      pull-requests: write
 
     steps:
       - name: 📥 Checkout code

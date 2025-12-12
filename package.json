@@ -1,36 +1,47 @@
 {
-	"name": "@konnco/file-entity",
-	"version": "0.0.1",
-	"description": "A lightweight model for file metadata.",
-	"type": "module",
-	"main": "dist/index.cjs",
-	"module": "dist/index.mjs",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.mts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
-		}
-	},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"release": "release-it",
-		"build": "tsdown ./src/index.ts --dts --format=es,cjs"
-	},
-	"files": [
-		"dist"
-	],
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com",
-		"access": "public"
-	},
-	"author": "Konnco Studio <support@konnco.com> (konnco)",
-	"keywords": [],
-	"license": "ISC",
-	"packageManager": "pnpm@10.10.0",
-	"devDependencies": {
-		"release-it": "^19.0.6",
-		"tsdown": "^0.16.6",
-		"typescript": "^5.9.3"
-	}
+  "name": "@konnco/file-entity",
+  "version": "0.0.1",
+  "description": "A lightweight model for file metadata.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it",
+    "build": "tsdown ./src/index.ts --dts --format=es,cjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "author": "Konnco Studio <support@konnco.com> (konnco)",
+  "keywords": [],
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "release-it": "^19.0.6",
+    "tsdown": "^0.16.6",
+    "typescript": "^5.9.3"
+  },
+  "release-it": {
+    "github": {
+      "release": true,
+      "releaseName": "Release v${version}"
+    },
+    "git": {
+      "tagName": "v${version}",
+      "commitMessage": "Release v${version}",
+      "tagAnnotation": "Release v${version}"
+    }
+  }
 }
