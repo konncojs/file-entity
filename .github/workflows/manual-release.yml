@@ -3,6 +3,14 @@ name: Manual Release
 on:
   workflow_dispatch:
     inputs:
+      publish-only:
+        description: "Publish only without creating a release"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
       increment:
         description: "Version increment type"
         required: true
@@ -62,7 +70,14 @@ jobs:
       - name: 📦 Building library
         run: pnpm build
 
+      - name: 🚀 Publishing to GitHub Packages
+        if: ${{ github.event.inputs.publish-only == 'true' }}
+        run: pnpm publish --access public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: 🚀 Run release-it with manual increment
+        if: ${{ github.event.inputs.publish-only == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
