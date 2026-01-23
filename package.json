@@ -1,5 +1,5 @@
 {
-  "name": "@konnco/file-entity",
+  "name": "@konncojs/file-entity",
   "version": "0.2.2",
   "description": "A lightweight model for file metadata.",
   "type": "module",
