@@ -13,7 +13,6 @@
     }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it",
     "build": "tsdown ./src/index.ts --dts --format=es,cjs"
   },
@@ -33,12 +32,12 @@
   "release-it": {
     "github": {
       "release": true,
-      "releaseName": "Release v${version}"
+      "releaseName": "v${version}"
     },
     "git": {
       "tagName": "v${version}",
-      "commitMessage": "Release v${version}",
-      "tagAnnotation": "Release v${version}"
+      "commitMessage": "v${version}",
+      "tagAnnotation": "v${version}"
     }
   }
 }
