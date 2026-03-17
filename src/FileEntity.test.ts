@@ -17,11 +17,6 @@ describe("FileEntity", () => {
       expect(entity.type).toBe("image/png");
     });
 
-    it("should set isFileEntity to true", () => {
-      const entity = new FileEntity({ name: "file.txt", type: "text/plain" });
-      expect(entity.isFileEntity).toBe(true);
-    });
-
     it("should allow size and uri to be undefined", () => {
       const entity = new FileEntity({ name: "file.txt", type: "text/plain" });
       expect(entity.size).toBeUndefined();
@@ -38,9 +33,19 @@ describe("FileEntity", () => {
       expect(FileEntity.is(entity)).toBe(true);
     });
 
-    it("should return true for a plain object that satisfies the shape", () => {
-      const obj = { isFileEntity: true, name: "file.txt" };
-      expect(FileEntity.is(obj)).toBe(true);
+    it("should return true for a FileEntity instance with all fields", () => {
+      const entity = new FileEntity({
+        name: "image.png",
+        size: 1024,
+        uri: "https://example.com/image.png",
+        type: "image/png",
+      });
+      expect(FileEntity.is(entity)).toBe(true);
+    });
+
+    it("should return false for a plain object with matching shape", () => {
+      const obj = { name: "file.txt", type: "text/plain" };
+      expect(FileEntity.is(obj)).toBe(false);
     });
 
     it("should return false for null", () => {
@@ -57,22 +62,14 @@ describe("FileEntity", () => {
       expect(FileEntity.is(true)).toBe(false);
     });
 
-    it("should return false when isFileEntity is missing", () => {
-      expect(FileEntity.is({ name: "file.txt" })).toBe(false);
-    });
-
-    it("should return false when isFileEntity is not true", () => {
-      expect(FileEntity.is({ isFileEntity: false, name: "file.txt" })).toBe(
-        false,
-      );
+    it("should return false for an empty object", () => {
+      expect(FileEntity.is({})).toBe(false);
     });
 
     it("should return false when name is not a string", () => {
-      expect(FileEntity.is({ isFileEntity: true, name: 123 })).toBe(false);
-    });
-
-    it("should return false for an empty object", () => {
-      expect(FileEntity.is({})).toBe(false);
+      const entity = new FileEntity({ name: "file.txt", type: "text/plain" });
+      (entity as unknown as Record<string, unknown>).name = 123;
+      expect(FileEntity.is(entity)).toBe(false);
     });
   });
 });
