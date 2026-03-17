@@ -15,7 +15,8 @@
   },
   "scripts": {
     "release": "release-it",
-    "build": "tsdown ./src/index.ts --dts --format=es,cjs"
+    "build": "tsdown ./src/index.ts --dts --format=es,cjs",
+    "test": "vitest"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -28,7 +29,8 @@
   "devDependencies": {
     "release-it": "^19.0.6",
     "tsdown": "^0.16.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   },
   "release-it": {
     "github": {

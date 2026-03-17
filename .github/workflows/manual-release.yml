@@ -70,6 +70,9 @@ jobs:
       - name: 📦 Building library
         run: pnpm build
 
+      - name: 🧪 Testing
+        run: pnpm test
+
       - name: 🚀 Publishing to GitHub Packages
         if: ${{ github.event.inputs.publish-only == 'true' }}
         run: pnpm publish --access public

@@ -1,6 +1,15 @@
 import type { FileEntityParams } from "./index.types";
 
+/**
+ * @description A lightweight model for file metadata. Useful for UI components that need to display file information. Use FileEntity.is(value) to type guard.
+ * @example new FileEntity({ name: "image.png", size: 1024, uri: "https://example.com/image.png", type: "image/png" })
+ */
 class FileEntity {
+	/**
+	 * @description A unique identifier for the file entity. Please use `FileEntity.is(value)` to type guard.
+	 */
+	readonly isFileEntity = true;
+
 	name: string;
 	size: number | undefined;
 	uri: string | undefined;
@@ -11,6 +20,19 @@ class FileEntity {
 		this.size = params.size;
 		this.uri = params.uri;
 		this.type = params.type;
+	}
+
+	/**
+	 * @description Type guard for FileEntity.
+	 */
+	static is(value: unknown): value is FileEntity {
+		return (
+			typeof value === "object" &&
+			value !== null &&
+			"isFileEntity" in value &&
+			value.isFileEntity === true &&
+			typeof (value as FileEntity).name === "string"
+		);
 	}
 }
 
