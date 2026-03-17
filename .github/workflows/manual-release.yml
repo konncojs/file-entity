@@ -60,7 +60,7 @@ jobs:
       - name: ⚙️ Configure .npmrc for GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > ~/.npmrc
-          echo "@konnco:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "@konncojs:registry=https://npm.pkg.github.com" >> ~/.npmrc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
