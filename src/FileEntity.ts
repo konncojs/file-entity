@@ -5,35 +5,35 @@ import type { FileEntityParams } from "./index.types";
  * @example new FileEntity({ name: "image.png", size: 1024, uri: "https://example.com/image.png", type: "image/png" })
  */
 class FileEntity {
-	/**
-	 * @description A unique identifier for the file entity. Please use `FileEntity.is(value)` to type guard.
-	 */
-	readonly isFileEntity = true;
+  /**
+   * @description A unique identifier for the file entity. Please use `FileEntity.is(value)` to type guard.
+   */
+  readonly isFileEntity = true;
 
-	name: string;
-	size: number | undefined;
-	uri: string | undefined;
-	type: string;
+  name: string;
+  size: number | undefined;
+  uri: string | undefined;
+  type: string;
 
-	constructor(params: FileEntityParams) {
-		this.name = params.name;
-		this.size = params.size;
-		this.uri = params.uri;
-		this.type = params.type;
-	}
+  constructor(params: FileEntityParams) {
+    this.name = params.name;
+    this.size = params.size;
+    this.uri = params.uri;
+    this.type = params.type;
+  }
 
-	/**
-	 * @description Type guard for FileEntity.
-	 */
-	static is(value: unknown): value is FileEntity {
-		return (
-			typeof value === "object" &&
-			value !== null &&
-			"isFileEntity" in value &&
-			value.isFileEntity === true &&
-			typeof (value as FileEntity).name === "string"
-		);
-	}
+  /**
+   * @description Type guard for FileEntity.
+   */
+  static is(value: unknown): value is FileEntity {
+    return (
+      typeof value === "object" &&
+      value !== null &&
+      "isFileEntity" in value &&
+      value.isFileEntity === true &&
+      typeof (value as FileEntity).name === "string"
+    );
+  }
 }
 
 export default FileEntity;
