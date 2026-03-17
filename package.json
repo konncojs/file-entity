@@ -3,8 +3,9 @@
   "version": "0.2.3",
   "description": "A lightweight model for file metadata.",
   "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "import": "./dist/index.mjs",
+  "require": "./dist/index.cjs",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
