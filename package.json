@@ -1,6 +1,6 @@
 {
   "name": "@konncojs/file-entity",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A lightweight model for file metadata.",
   "type": "module",
   "types": "./dist/index.d.mts",
