@@ -1,35 +1,62 @@
 {
-  "name": "@konncojs/file-entity",
+  "name": "@konnco/file-entity",
   "version": "0.3.2",
   "description": "A lightweight model for file metadata.",
   "type": "module",
   "types": "./dist/index.d.mts",
-  "import": "./dist/index.mjs",
-  "require": "./dist/index.cjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
+  "files": [
+    "skills",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "release": "release-it",
     "build": "tsdown ./src/index.ts --dts --format=es,cjs",
-    "test": "vitest"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
+    "format": "biome check --fix"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
-  "author": "Konnco Studio <support@konnco.com> (konnco)",
-  "keywords": [],
-  "license": "ISC",
-  "packageManager": "pnpm@10.10.0",
+  "author": "Konnco Studio <support@konnco.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konncojs/file-entity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konncojs/file-entity/issues"
+  },
+  "homepage": "https://github.com/konncojs/file-entity#readme",
+  "keywords": [
+    "file",
+    "entity",
+    "metadata",
+    "upload",
+    "typescript"
+  ],
+  "license": "MIT",
+  "packageManager": "pnpm@11.20.0",
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
     "@konnco/biomer": "^0.0.2",
-    "release-it": "^19.0.6",
+    "release-it": "^21.0.2",
     "tsdown": "^0.16.6",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0"
@@ -43,6 +70,10 @@
       "tagName": "v${version}",
       "commitMessage": "v${version}",
       "tagAnnotation": "v${version}"
+    },
+    "npm": {
+      "stage": true,
+      "skipChecks": true
     }
   }
 }
